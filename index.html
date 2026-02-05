@@ -6,14 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+/* ================= RESET ================= */
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
-  height:100vh;
-  font-family:'Segoe UI',system-ui,sans-serif;
-  background: radial-gradient(circle at top,#1a1a1a,#000);
+  height: 100vh;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: radial-gradient(circle at top, #1a1a1a, #000);
   color:#fff;
   overflow:hidden;
 }
+
+/* ================= SCREENS ================= */
 .screen {
   position:absolute; inset:0;
   display:flex; justify-content:center; align-items:center; flex-direction:column;
@@ -21,15 +24,19 @@ body {
   transition: opacity 1s ease;
 }
 .screen.active { opacity:1; pointer-events:all; }
+
+/* ================= CARD ================= */
 .card {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(18px);
-  padding:40px;
+  padding: 40px;
   border-radius:26px;
   max-width:460px;
   text-align:center;
   box-shadow:0 0 40px rgba(255,255,255,0.12);
 }
+
+/* ================= BUTTONS ================= */
 button {
   margin-top:30px;
   padding:14px 32px;
@@ -40,25 +47,68 @@ button {
   transition: transform .3s, box-shadow .3s, opacity .3s;
 }
 button:hover { transform: scale(1.06); }
+
 #yes { background: linear-gradient(135deg,#ff4d6d,#ff8fab); color:white; animation:heartbeat 1.2s infinite; }
 #no { background:#555; color:white; cursor:not-allowed; pointer-events:auto; transition: transform .3s, opacity .3s; }
-@keyframes heartbeat { 0%{transform:scale(1);} 25%{transform:scale(1.1);} 40%{transform:scale(1);} 60%{transform:scale(1.15);} 100%{transform:scale(1);} }
+
+@keyframes heartbeat {
+  0%{transform:scale(1);} 25%{transform:scale(1.1);} 40%{transform:scale(1);} 60%{transform:scale(1.15);} 100%{transform:scale(1);}
+}
+
+/* ================= LETTER ================= */
 .text { font-size:1.1rem; line-height:1.9; min-height:230px; }
-.hearts span { position:absolute; font-size:24px; animation:float 5s linear infinite; }
-@keyframes float { from{transform:translateY(110vh); opacity:1;} to{transform:translateY(-10vh); opacity:0;} }
-.final-container { position:relative; width:100%; height:100%; display:flex; justify-content:center; align-items:center; background: radial-gradient(circle at center,#1b1b1b,#000); overflow:hidden; }
-.final-glow { position:absolute; width:500px; height:500px; background: radial-gradient(circle, rgba(255,77,109,0.35), transparent 70%); filter: blur(60px); animation: glowPulse 6s ease-in-out infinite; }
-@keyframes glowPulse { 0%,100%{transform:scale(1); opacity:.6;} 50%{transform:scale(1.15); opacity:.9;} }
-.final-card { position:relative; z-index:2; background: rgba(255,255,255,0.08); backdrop-filter: blur(22px); border-radius:32px; padding:60px 50px; max-width:520px; text-align:center; box-shadow:0 30px 80px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.12); animation: finalReveal 1.6s ease forwards; }
-@keyframes finalReveal { from{opacity:0; transform:translateY(40px) scale(0.96);} to{opacity:1; transform:translateY(0) scale(1);} }
+
+/* ================= HEARTS ================= */
+.hearts span {
+  position:absolute; font-size:24px;
+  animation:float 5s linear infinite;
+}
+@keyframes float {
+  from{transform:translateY(110vh); opacity:1;}
+  to{transform:translateY(-10vh); opacity:0;}
+}
+
+/* ================= FINAL ================= */
+.final-container {
+  position:relative; width:100%; height:100%;
+  display:flex; justify-content:center; align-items:center;
+  background: radial-gradient(circle at center, #1b1b1b,#000);
+  overflow:hidden;
+}
+.final-glow {
+  position:absolute; width:500px; height:500px;
+  background: radial-gradient(circle, rgba(255,77,109,0.35), transparent 70%);
+  filter: blur(60px);
+  animation: glowPulse 6s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%,100%{transform:scale(1); opacity:.6;} 50%{transform:scale(1.15); opacity:.9;}
+}
+.final-card {
+  position:relative; z-index:2;
+  background: rgba(255,255,255,0.08); backdrop-filter: blur(22px);
+  border-radius:32px; padding:60px 50px; max-width:520px;
+  text-align:center; box-shadow:0 30px 80px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.12);
+  animation: finalReveal 1.6s ease forwards;
+}
+@keyframes finalReveal {
+  from{opacity:0; transform:translateY(40px) scale(0.96);}
+  to{opacity:1; transform:translateY(0) scale(1);}
+}
 .final-title { font-size:2.2rem; font-weight:600; letter-spacing:.5px; background:linear-gradient(135deg,#ff8fab,#ff4d6d); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
 .final-line { width:60px; height:3px; margin:25px auto; background:linear-gradient(90deg,#ff4d6d,#ff8fab); border-radius:10px; }
 .final-text { font-size:1.15rem; line-height:1.9; color: rgba(255,255,255,0.9);}
 .final-text span { color:#ff8fab; font-weight:500; }
 .final-signature { margin-top:35px; font-size:.95rem; color:rgba(255,255,255,.6); letter-spacing:.5px; }
-input { padding:12px; border-radius:20px; border:none; width:80%; max-width:260px; margin-top:20px; text-align:center; font-size:1rem; }
+
+/* ================= INPUT ================= */
+input {
+  padding:12px; border-radius:20px; border:none; width:80%; max-width:260px;
+  margin-top:20px; text-align:center; font-size:1rem;
+}
 </style>
 </head>
+
 <body>
 
 <!-- SCREEN 0 -->
@@ -90,7 +140,7 @@ input { padding:12px; border-radius:20px; border:none; width:80%; max-width:260p
 <!-- SCREEN 3: LETTER -->
 <div class="screen" id="screen3">
   <div class="card">
-    <div class="text" id="letter">Hey Maddie, I hope this makes you smile today. I could’ve bought flowers, but I wanted to give you something that lasts. Something made with time and intention. This isn’t just code. This is me being vulnerable. And now there’s only one thing left to ask you.</div>
+    <div class="text" id="letter"></div>
     <button class="primary" style="margin-top:20px;" onclick="show('screen4')">Next</button>
   </div>
 </div>
@@ -152,6 +202,17 @@ async function typeText(el,text,speed=40){
 function checkSecret(){
   const value=document.getElementById("secret").value.trim().toLowerCase();
   if(value==="maddie"){
+    // Carta aparece inmediatamente con estilo
+    const letterEl = document.getElementById("letter");
+    letterEl.innerHTML = `
+      Hey Maddie,<br><br>
+      I could’ve bought flowers.<br>
+      But I wanted to give you something that lasts.<br>
+      Something made with time and intention.<br><br>
+      This isn’t just code.<br>
+      This is me being vulnerable.<br><br>
+      And now there’s only one thing left to ask you.
+    `;
     show("screen3");
   } else {
     document.getElementById("error").innerText="Access denied.";
