@@ -34,6 +34,8 @@ body {
   max-width:460px;
   text-align:center;
   box-shadow:0 0 40px rgba(255,255,255,0.12);
+  position: relative;
+  overflow: hidden;
 }
 
 /* ================= BUTTONS ================= */
@@ -56,7 +58,7 @@ button:hover { transform: scale(1.06); }
 }
 
 /* ================= LETTER ================= */
-.text { font-size:1.1rem; line-height:1.9; min-height:230px; }
+.text { font-size:1.1rem; line-height:1.9; min-height:230px; white-space:pre-wrap; }
 
 /* ================= HEARTS ================= */
 .hearts span {
@@ -167,9 +169,9 @@ input {
       <p class="final-text">
         This Valentine’s Day is ours.<br><br>
         And I choose you.<br>
-        <span>Every single day.</span>
+        <span>Every single day.</span><br><br>
+        <span>— Adrian ❤️</span>
       </p>
-      <p class="final-signature">— With love, always</p>
     </div>
   </div>
   <div class="hearts" id="hearts"></div>
@@ -191,7 +193,7 @@ const terminalLines = [
 ];
 async function typeText(el,text,speed=40){
   for(let char of text){ el.innerHTML+=char; await new Promise(r=>setTimeout(r,speed)); }
-  el.innerHTML+="<br>";
+  el.innerHTML+="\n";
 }
 (async ()=>{
   const t=document.getElementById("terminal");
@@ -202,18 +204,28 @@ async function typeText(el,text,speed=40){
 function checkSecret(){
   const value=document.getElementById("secret").value.trim().toLowerCase();
   if(value==="maddie"){
-    // Carta aparece inmediatamente con estilo
-    const letterEl = document.getElementById("letter");
-    letterEl.innerHTML = `
-      Hey Maddie,<br><br>
-      I could’ve bought flowers.<br>
-      But I wanted to give you something that lasts.<br>
-      Something made with time and intention.<br><br>
-      This isn’t just code.<br>
-      This is me being vulnerable.<br><br>
-      And now there’s only one thing left to ask you.
-    `;
     show("screen3");
+    // efecto typing de la carta
+    const letterEl = document.getElementById("letter");
+    const letterLines = [
+      "Hey Maddie,",
+      "",
+      "I could’ve bought flowers.",
+      "But I wanted to give you something that lasts.",
+      "Something made with time and intention.",
+      "",
+      "This isn’t just code.",
+      "This is me being vulnerable.",
+      "",
+      "And now there’s only one thing left to ask you."
+    ];
+    letterEl.innerHTML = "";
+    (async()=>{
+      for(let line of letterLines){
+        await typeText(letterEl,line,35);
+        await new Promise(r=>setTimeout(r,200));
+      }
+    })();
   } else {
     document.getElementById("error").innerText="Access denied.";
   }
